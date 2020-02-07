@@ -1,10 +1,37 @@
 #!/usr/bin/python
 
+'''
+Loop over arguements
+Track the current lowest price and the current max profit
+If the value is lower than the lowest price, lowest price equals that value
+Else if value minus current lowest price is higher than current max profit, set that to max profit
+Return max profit after looping over all values
+'''
+
 import argparse
 
 def find_max_profit(prices):
-  pass
 
+  curr_min = None
+  max_profit = None
+
+  for price in prices:
+    if curr_min is not None and max_profit is None:
+      max_profit = price - curr_min
+    if curr_min is None:
+      curr_min = price
+      print(f'In 1: {price}, {curr_min}, {max_profit}')
+    if (curr_min is not None) and (max_profit is not None) and  (price - curr_min) > max_profit:
+      max_profit = price - curr_min
+      print(f'In 3: {price}, {curr_min}, {max_profit}')
+    if (curr_min is not None) and price < curr_min:
+      curr_min = price
+      print(f'In 2: {price}, {curr_min}, {max_profit}')
+    
+  
+  return max_profit
+
+print(find_max_profit([100, 90, 80, 50, 20, 10]))
 
 if __name__ == '__main__':
   # This is just some code to accept inputs from the command line
